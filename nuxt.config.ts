@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
-      title: "Rezervations app",
+      title: "Reservations app",
       link: [
         {
           rel: "stylesheet",
@@ -15,7 +15,8 @@ export default defineNuxtConfig({
   },
 
   css: ["./assets/main.css"],
-  modules: ["@nuxtjs/tailwindcss"],
+  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "@samk-dev/nuxt-vcalendar"],
   devtools: { enabled: true },
   pages: true,
+  ssr: false,
 });
