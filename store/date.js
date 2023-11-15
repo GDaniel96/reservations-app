@@ -1,11 +1,33 @@
 import { defineStore } from "pinia";
 
 export const useDateStore = defineStore("dateStore", () => {
-  const currentDate = ref(new Date());
+  const reservationData = ref({
+    currentDate: new Date(),
+    selectedDate: null,
+    fullName: "",
+    email: "",
+    description: "",
+  });
 
-  function setDate(dateValue) {
-    currentDate.value = new Date(dateValue);
-    console.log(dateValue);
+  const formatedDate = computed(() => {
+    return reservationData.value.currentDate.toLocaleDateString("en-US", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  });
+
+  const formatedTime = computed(() => {
+    return reservationData.value.currentDate.toLocaleTimeString("en-US", {
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  });
+
+  function setData(data) {
+    reservationData.value.selectedDate = new Date(`${data.date}  ${data.time}`);
   }
-  return { currentDate, setDate };
+
+  return { reservationData, setData, formatedDate, formatedTime };
 });
