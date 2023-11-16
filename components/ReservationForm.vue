@@ -21,32 +21,34 @@
         <div class="relative z-0 w-full mb-6 group">
           <VField
             class="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            name="fullname"
+            name="full_name"
             type="text"
             placeholder=""
             v-model="store.reservationData.fullName"
           />
           <label
             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            for="fullname"
+            for="fullName"
           >
             Full name
           </label>
+          <VErrorMessage class="text-red-600" name="full_name" />
         </div>
         <div class="relative z-0 w-full mb-6 group">
           <VField
             class="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            name="number"
+            name="email"
             type="email"
             placeholder=""
             v-model="store.reservationData.email"
           />
           <label
             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            for="number"
+            for="email"
           >
             Email
           </label>
+          <VErrorMessage class="text-red-600" name="email" />
         </div>
 
         <div class="relative z-0 w-full mb-6 group">
@@ -56,6 +58,7 @@
             type="text"
             placeholder=""
             v-model="store.formatedDate"
+            disabled
           />
           <label
             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -71,6 +74,7 @@
             type="text"
             placeholder=""
             v-model="store.formatedTime"
+            disabled
           />
           <label
             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -94,6 +98,7 @@
           >
             Description
           </label>
+          <VErrorMessage class="text-red-600" name="description" />
         </div>
 
         <div class="flex items-center justify-between flex-col">
@@ -120,6 +125,8 @@ export default {
 
     const schema = {
       email: "required|email",
+      full_name: "alpha_spaces|required",
+      description: "required|min:10|max:100",
     };
 
     return {
