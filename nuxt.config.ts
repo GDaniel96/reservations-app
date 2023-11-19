@@ -20,4 +20,14 @@ export default defineNuxtConfig({
   pages: true,
   ssr: false,
   plugins: ["./plugins/veevalidate-rules"],
+  runtimeConfig: {
+    public: {
+      API_KEY: process.env.NUXT_API_KEY,
+      AUTH_DOMAIN: process.env.NUXT_AUTH_DOMAIN,
+      PROJECT_ID: process.env.NUXT_PROJECT_ID,
+      STORAGE_BUCKET: process.env.NUXT_STORAGE_BUCKET,
+      MESSAGE_SENDER_IT: process.env.NUXT_MESSAGE_SENDER_ID,
+      APP_ID: process.env.NUXT_APP_ID,
+    },
+  },
 });

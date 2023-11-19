@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import { useDateStore } from "../store/date";
 import ReservationForm from "~/components/ReservationForm.vue";
 
 export default {
@@ -20,8 +19,6 @@ export default {
     ReservationForm,
   },
   setup() {
-    const store = useDateStore();
-
     return {};
   },
 };

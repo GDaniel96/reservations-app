@@ -2,21 +2,21 @@
   <section class="flex w-full flex gap-6 mt-10">
     <div class="date-container w-full">
       <DatePicker
-        v-model="store.reservationData.currentDate"
+        v-model="store.reservationData.selectedDate"
         expanded
         mode="dateTime"
         is24hr
         is-dark
       />
-      <p>{{ store.reservationData.currentDate }}</p>
+      <p>{{ store.reservationData.selectedDate }}</p>
     </div>
     <div
       class="form-container w-full bg-[#0f172a] shadow-md rounded px-8 pt-6 pb-8 mb-4"
     >
       <VForm
         class="bg-[#334155] shadow-md rounded px-8 pt-6 pb-8 mb-4"
-        @submit="store.setData"
         :validation-schema="schema"
+        @submit="submitReservation"
       >
         <div class="relative z-0 w-full mb-6 group">
           <VField
@@ -57,7 +57,7 @@
             name="date"
             type="text"
             placeholder=""
-            v-model="store.formatedDate"
+            v-model="formatedDate"
             disabled
           />
           <label
@@ -73,7 +73,7 @@
             name="time"
             type="text"
             placeholder=""
-            v-model="store.formatedTime"
+            v-model="formatedTime"
             disabled
           />
           <label
@@ -117,11 +117,14 @@
 <script>
 import "v-calendar/style.css";
 import { DatePicker } from "v-calendar";
-import { useDateStore } from "~/store/date";
+import { useNewReservationStore } from "~/store/date";
+import { addDoc, collection } from "firebase/firestore";
+import { inject } from "vue";
 
 export default {
   setup() {
-    const store = useDateStore();
+    const store = useNewReservationStore();
+    const db = inject("firestore");
 
     const schema = {
       email: "required|email",
@@ -129,9 +132,46 @@ export default {
       description: "required|min:10|max:100",
     };
 
+    const submitReservation = async () => {
+      await addDoc(collection(db, "reservations"), {
+        fullName: store.reservationData.fullName,
+        email: store.reservationData.email,
+        selectedDate: store.reservationData.selectedDate,
+        description: store.reservationData.description,
+      });
+
+      resetForm();
+    };
+
+    const resetForm = () => {
+      store.reservationData.fullName = "";
+      store.reservationData.email = "";
+      store.reservationData.selectedDate = new Date();
+      store.reservationData.description = "";
+    };
+
+    const formatedDate = computed(() => {
+      return store.reservationData.selectedDate.toLocaleDateString("en-US", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+    });
+
+    const formatedTime = computed(() => {
+      return store.reservationData.selectedDate.toLocaleTimeString("en-US", {
+        hour12: false,
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    });
+
     return {
       store,
       schema,
+      formatedDate,
+      formatedTime,
+      submitReservation,
     };
   },
 
