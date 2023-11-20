@@ -8,7 +8,7 @@
         needed. You just need to submit your request and you will receive an
         e-mail with all the details
       </h1>
-      <NuxtLink to="/new">
+      <NuxtLink to="/new" v-if="userStore.userData.userLoggedIn">
         <button
           class="p-2 bg-teal-500 rounded w-fit text-white border-neutral-950 border-2"
         >
@@ -17,7 +17,7 @@
       </NuxtLink>
     </div>
     <div
-      v-if="!userRegistered"
+      v-if="!userStore.userData.userLoggedIn"
       class="w-2/4 h-2/4 bg-[#4B4B4F] h-fit bg-opacity-70 p-4 flex gap-2 flex-col rounded-2xl overflow-auto"
     >
       <Authentication />
@@ -41,13 +41,14 @@
 </template>
 
 <script>
-import Authentication from "~/components/Authentication.vue";
+import Authentication from "../components/Authentication.vue";
+import { useUserStore } from "../store/user";
 import { collection, getDocs } from "firebase/firestore";
 import { inject } from "vue";
 
 export default {
   async setup() {
-    const userRegistered = ref(false);
+    const userStore = useUserStore();
 
     const db = inject("firestore");
     const reservationCollection = collection(db, "reservations");
@@ -66,7 +67,7 @@ export default {
 
     return {
       dbDocuments,
-      userRegistered,
+      userStore,
     };
   },
   components: { Authentication },

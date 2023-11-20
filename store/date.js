@@ -8,9 +8,5 @@ export const useNewReservationStore = defineStore("newReservationStore", () => {
     description: "",
   });
 
-  function setData(data) {
-    reservationData.value.selectedDate = new Date(`${data.date}  ${data.time}`);
-  }
-
-  return { reservationData, setData };
+  return { reservationData };
 });

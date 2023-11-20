@@ -10,7 +10,7 @@
           name="firstName"
           type="text"
           placeholder=""
-          v-model="userCredentials.firstName"
+          v-model="userStore.userRegistrationData.firstName"
         />
         <label
           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -26,7 +26,7 @@
           name="lastName"
           type="text"
           placeholder=""
-          v-model="userCredentials.lastName"
+          v-model="userStore.userRegistrationData.lastName"
         />
         <label
           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -43,7 +43,7 @@
           name="email"
           type="text"
           placeholder=""
-          v-model="userCredentials.email"
+          v-model="userStore.userRegistrationData.email"
         />
         <label
           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -59,7 +59,7 @@
           name="password"
           type="password"
           placeholder=""
-          v-model="userCredentials.password"
+          v-model="userStore.userRegistrationData.password"
         />
         <label
           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -84,44 +84,39 @@
 <script>
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
+import { useUserStore } from "../store/user";
 import { inject } from "vue";
 
 export default {
   setup() {
     const auth = inject("auth");
     const db = inject("firestore");
-
-    const userCredentials = ref({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-    });
+    const userStore = useUserStore();
 
     const registerUser = async () => {
       const userCred = await createUserWithEmailAndPassword(
         auth,
-        userCredentials.value.email,
-        userCredentials.value.password
+        userStore.userRegistrationData.email,
+        userStore.userRegistrationData.password
       );
       await addDoc(collection(db, "users"), {
         uid: userCred.user.uid,
-        firstName: userCredentials.value.firstName,
-        lastName: userCredentials.value.lastName,
-        email: userCredentials.value.email,
-        password: userCredentials.value.password,
+        firstName: userStore.userRegistrationData.firstName,
+        lastName: userStore.userRegistrationData.lastName,
+        email: userStore.userRegistrationData.email,
+        password: userStore.userRegistrationData.password,
       });
 
       resetForm();
     };
 
     const resetForm = () => {
-      userCredentials.value.firstName = "";
-      userCredentials.value.lastName = "";
-      userCredentials.value.email = "";
-      userCredentials.value.password = "";
+      userStore.userRegistrationData.firstName = "";
+      userStore.userRegistrationData.lastName = "";
+      userStore.userRegistrationData.email = "";
+      userStore.userRegistrationData.password = "";
     };
-    return { userCredentials, registerUser };
+    return { registerUser, userStore };
   },
 };
 </script>
