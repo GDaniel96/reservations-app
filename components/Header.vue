@@ -10,11 +10,7 @@
       <NuxtLink to="/new">
         <button class="p-2 bg-[#113946] rounded">New Reservation</button>
       </NuxtLink>
-      <p>
-        {{
-          `Hello, ${userStore.userRegistrationData.firstName} ${userStore.userRegistrationData.lastName}`
-        }}
-      </p>
+      <p>{{}}</p>
       <button @click="logout">Logout</button>
     </div>
   </nav>
@@ -23,6 +19,7 @@
 <script>
 import { useUserStore } from "../store/user";
 import { signOut } from "firebase/auth";
+import { collection, getDoc, query, where } from "firebase/firestore";
 import { inject } from "vue";
 
 export default {
@@ -30,7 +27,6 @@ export default {
     const auth = inject("auth");
     const userStore = useUserStore();
 
-    console.log(userStore.userRegistrationData);
     const logout = async () => {
       try {
         await signOut(auth);
