@@ -30,11 +30,12 @@ export default {
     const auth = inject("auth");
     const userStore = useUserStore();
 
+    console.log(userStore.userRegistrationData);
     const logout = async () => {
       try {
         await signOut(auth);
         userStore.userData.userLoggedIn = false;
-        console.log("sign-out success");
+        navigateTo("/");
       } catch (error) {
         console.log(error);
       }

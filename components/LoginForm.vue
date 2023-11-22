@@ -60,7 +60,6 @@ import { useUserStore } from "~/store/user";
 export default {
   setup() {
     const auth = inject("auth");
-    const db = inject("firestore");
     const userStore = useUserStore();
 
     const login_show_alert = ref(false);

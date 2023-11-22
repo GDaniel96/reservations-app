@@ -124,6 +124,7 @@ export default {
   setup() {
     const store = useNewReservationStore();
     const db = inject("firestore");
+    const auth = inject("auth");
 
     const schema = {
       email: "required|email",
@@ -137,6 +138,7 @@ export default {
         email: store.reservationData.email,
         selectedDate: store.reservationData.selectedDate,
         description: store.reservationData.description,
+        userId: auth.currentUser.uid,
       });
 
       resetForm();
