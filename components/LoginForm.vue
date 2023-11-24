@@ -7,7 +7,7 @@
     {{ login_message }}
   </div>
   <VForm
-    class="bg-[#334155] shadow-md rounded-tl-none px-8 pt-6 pb-8 mb-4"
+    class="bg-[#1e293b] shadow-md rounded-tl-none px-8 pt-6 pb-8 mb-4"
     @submit="submitLogInInformation"
   >
     <div class="relative z-0 w-full mb-6 group">
@@ -44,7 +44,7 @@
     </div>
     <div class="flex items-center justify-between flex-col">
       <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        class="bg-[#113946] hover:bg-[#475569] text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         type="submit"
       >
         Submit

@@ -1,17 +1,26 @@
 <template>
   <nav
-    class="w-full h-13 py-4 flex gap-2 justify-center items-center bg-[#BCA37F] text-white"
+    class="w-full h-13 py-4 flex gap-2 justify-center items-center bg-[#112337] text-white"
   >
-    <i class="fa-solid fa-calendar-days fa-2xl"></i>
     <NuxtLink to="/">
-      <button class="p-2 bg-[#113946] rounded">Home</button>
+      <button class="p-2 bg-[#113946] hover:bg-[#475569] rounded">Home</button>
     </NuxtLink>
-    <div v-if="userStore.userData.userLoggedIn" class="flex justify-between">
+    <div
+      v-if="userStore.userData.userLoggedIn"
+      class="flex justify-between gap-2"
+    >
       <NuxtLink to="/new">
-        <button class="p-2 bg-[#113946] rounded">New Reservation</button>
+        <button class="p-2 bg-[#113946] hover:bg-[#475569] rounded">
+          New Reservation
+        </button>
       </NuxtLink>
-      <p>{{}}</p>
-      <button @click="logout">Logout</button>
+
+      <button
+        @click="logout"
+        class="p-2 bg-[#dc2626] hover:bg-[#ec4949] rounded"
+      >
+        Logout
+      </button>
     </div>
   </nav>
 </template>
@@ -19,7 +28,6 @@
 <script>
 import { useUserStore } from "../store/user";
 import { signOut } from "firebase/auth";
-import { collection, getDoc, query, where } from "firebase/firestore";
 import { inject } from "vue";
 
 export default {

@@ -1,26 +1,41 @@
 <template>
+  <h1 class="text-2xl text-white">My reservations</h1>
   <div
     v-for="document in reservationDocuments"
-    class="w-full h-20 bg-[#2D2D30] rounded-3xl p-2 text-white"
+    class="w-full h-auto bg-[#0f172a] rounded p-2 text-white flex flex-col gap-2 overflow-visible relative"
   >
-    <p>{{ document.fullName }}</p>
+    <h2 class="font-bold text-lg">{{ document.description }}</h2>
+    <h2>{{ document.fullName }}</h2>
     <p>{{ document.email }}</p>
-    <p>{{ document.description }}</p>
-    <p>{{ document.selectedDate.seconds }}</p>
+    <p>{{ new Date(document.selectedDate.seconds * 1000).toDateString() }}</p>
+    <p>{{ new Date(document.selectedDate.seconds * 1000).toTimeString() }}</p>
+    <button
+      class="bg-[#dc2626] hover:bg-[#ec4949] rounded-full w-6 absolute -top-2 -right-2"
+      @click="deleteReservation(document.docId)"
+    >
+      <i class="fa-solid fa-trash-can"></i>
+    </button>
   </div>
 </template>
 
 <script>
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import { inject } from "vue";
 
 export default {
   setup() {
     const reservationDocuments = ref([]);
+    const db = inject("firestore");
+    const auth = inject("auth");
 
     const getDocuments = async () => {
-      const auth = inject("auth");
-      const db = inject("firestore");
       const user = auth.currentUser;
 
       if (!user) {
@@ -34,15 +49,23 @@ export default {
       const querySnapshot = await getDocs(documentsByUserQuery);
 
       querySnapshot.forEach((doc) => {
-        reservationDocuments.value.push(doc.data());
+        reservationDocuments.value.push({ ...doc.data(), docId: doc.id });
       });
+    };
+
+    const deleteReservation = async (docId) => {
+      await deleteDoc(doc(db, "reservations", docId));
+      reservationDocuments.value = [];
+      getDocuments();
     };
 
     onBeforeMount(() => {
       getDocuments();
     });
+
     return {
       reservationDocuments,
+      deleteReservation,
     };
   },
 };

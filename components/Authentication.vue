@@ -4,8 +4,8 @@
       <div
         class="w-1/2 text-center p-4 bg rounded-t"
         :class="{
-          'bg-[#334155]': userHasAccount,
-          'bg-[#3d5c87]': !userHasAccount,
+          'bg-[#1e293b]': userHasAccount,
+          'bg-[#334155]': !userHasAccount,
         }"
       >
         <a href="#" @click="switchAuthenticationForm">Login</a>
@@ -13,8 +13,8 @@
       <div
         class="w-1/2 text-center p-4 rounded-t"
         :class="{
-          'bg-[#334155]': !userHasAccount,
-          'bg-[#3d5c87]': userHasAccount,
+          'bg-[#1e293b]': !userHasAccount,
+          'bg-[#334155]': userHasAccount,
         }"
       >
         <a href="#" @click="switchAuthenticationForm">Register</a>
