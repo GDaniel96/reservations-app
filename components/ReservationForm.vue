@@ -13,7 +13,9 @@
       class="form-container w-full bg-[#0f172a] shadow-md rounded px-8 pt-6 pb-8 mb-4"
     >
       <VForm
-        class="bg-[#334155] shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        as="form"
+        ref="reservationForm"
+        class="reservationForm bg-[#334155] shadow-md rounded px-8 pt-6 pb-8 mb-4"
         :validation-schema="schema"
         @submit="submitReservation"
       >
@@ -24,6 +26,7 @@
             type="text"
             placeholder=""
             v-model="store.reservationData.fullName"
+            as="field"
           />
           <label
             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -40,6 +43,7 @@
             type="email"
             placeholder=""
             v-model="store.reservationData.email"
+            as="field"
           />
           <label
             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -58,6 +62,7 @@
             placeholder=""
             v-model="formatedDate"
             disabled
+            as="field"
           />
           <label
             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -74,6 +79,7 @@
             placeholder=""
             v-model="formatedTime"
             disabled
+            as="field"
           />
           <label
             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -119,12 +125,16 @@ import { DatePicker } from "v-calendar";
 import { useNewReservationStore } from "~/store/date";
 import { addDoc, collection } from "firebase/firestore";
 import { inject } from "vue";
+import emailjs from "@emailjs/browser";
 
 export default {
   setup() {
     const store = useNewReservationStore();
     const db = inject("firestore");
     const auth = inject("auth");
+    const config = useRuntimeConfig();
+
+    const reservationForm = ref({});
 
     const schema = {
       email: "required|email",
@@ -141,7 +151,9 @@ export default {
         userId: auth.currentUser.uid,
       });
 
+      await sendEmailWithReservationDetails();
       resetForm();
+      navigateTo("/");
     };
 
     const resetForm = () => {
@@ -149,6 +161,28 @@ export default {
       store.reservationData.email = "";
       store.reservationData.selectedDate = new Date();
       store.reservationData.description = "";
+    };
+
+    const sendEmailWithReservationDetails = async () => {
+      try {
+        await emailjs.send(
+          config.public.EMAILJS_SERVICE_ID,
+          config.public.EMAILJS_TEMPLATE_ID,
+          {
+            full_name: store.reservationData.fullName,
+            date: store.reservationData.selectedDate.toDateString(),
+            time: store.reservationData.selectedDate.toTimeString(),
+            email: store.reservationData.email,
+            message: store.reservationData.description,
+          },
+          config.public.EMAILJS_PUBLIC_KEY
+        );
+        alert(
+          "An email has been sent to your email address with all the reservation details. Make sure to verify your spam folder."
+        );
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     const formatedDate = computed(() => {
@@ -173,6 +207,7 @@ export default {
       formatedDate,
       formatedTime,
       submitReservation,
+      reservationForm,
     };
   },
 

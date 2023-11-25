@@ -4,7 +4,9 @@
     v-for="document in reservationDocuments"
     class="w-full h-auto bg-[#0f172a] rounded p-2 text-white flex flex-col gap-2 overflow-visible relative"
   >
-    <h2 class="font-bold text-lg">{{ document.description }}</h2>
+    <h2 class="description font-bold text-lg overflow-auto">
+      {{ document.description }}
+    </h2>
     <h2>{{ document.fullName }}</h2>
     <p>{{ document.email }}</p>
     <p>{{ new Date(document.selectedDate.seconds * 1000).toDateString() }}</p>
@@ -70,3 +72,21 @@ export default {
   },
 };
 </script>
+
+<style>
+.description::-webkit-scrollbar {
+  height: 10px;
+}
+
+/* Track */
+.description::-webkit-scrollbar-track {
+  background: #94a3b8;
+  border-radius: 5px;
+}
+
+/* Handle */
+.description::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 5px;
+}
+</style>

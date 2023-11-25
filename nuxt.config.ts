@@ -28,6 +28,9 @@ export default defineNuxtConfig({
       STORAGE_BUCKET: process.env.NUXT_STORAGE_BUCKET,
       MESSAGE_SENDER_IT: process.env.NUXT_MESSAGE_SENDER_ID,
       APP_ID: process.env.NUXT_APP_ID,
+      EMAILJS_SERVICE_ID: process.env.NUXT_EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID: process.env.NUXT_EMAILJS_TEMPLATE_ID,
+      EMAILJS_PUBLIC_KEY: process.env.NUXT_EMAILJS_PUBLIC_KEY,
     },
   },
 });
