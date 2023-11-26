@@ -104,6 +104,7 @@ export default {
         firstName: userStore.userRegistrationData.firstName,
         lastName: userStore.userRegistrationData.lastName,
         email: userStore.userRegistrationData.email,
+        role: userStore.userRegistrationData.role,
         password: userStore.userRegistrationData.password,
       });
 

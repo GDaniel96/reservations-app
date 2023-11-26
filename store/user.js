@@ -10,6 +10,7 @@ export const useUserStore = defineStore("userStore", () => {
     lastName: "",
     email: "",
     password: "",
+    role: "user",
   });
 
   return {

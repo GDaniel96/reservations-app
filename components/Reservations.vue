@@ -24,6 +24,7 @@
 import {
   collection,
   getDocs,
+  getDoc,
   query,
   where,
   doc,
@@ -44,11 +45,19 @@ export default {
         return;
       }
 
+      const userAdminDoc = doc(db, "users", "04oZeeW25fgRQG4ISdXI");
+      const queryAdminSnapshot = await getDoc(userAdminDoc);
+
       const documentsByUserQuery = query(
         collection(db, "reservations"),
         where("userId", "==", user.uid)
       );
-      const querySnapshot = await getDocs(documentsByUserQuery);
+
+      const querySnapshot = await getDocs(
+        user.uid === queryAdminSnapshot.data().uid
+          ? collection(db, "reservations")
+          : documentsByUserQuery
+      );
 
       querySnapshot.forEach((doc) => {
         reservationDocuments.value.push({ ...doc.data(), docId: doc.id });
