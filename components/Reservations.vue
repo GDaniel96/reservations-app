@@ -1,5 +1,40 @@
 <template>
-  <h1 class="text-2xl text-white">My reservations</h1>
+  <h1 class="text-2xl text-white text-center">My reservations</h1>
+  <div class="filters flex justify-evenly">
+    <div class="flex gap-2">
+      <input
+        type="checkbox"
+        class="filter"
+        name="all"
+        v-model="filters.showAll"
+        @click="toggleFilters"
+        :disabled="filters.showAll"
+      />
+      <label for="all">All </label>
+    </div>
+    <div class="flex gap-2">
+      <input
+        type="checkbox"
+        name="nextWeek"
+        class="filter"
+        v-model="filters.nextWeek"
+        @click="toggleFilters"
+        :disabled="filters.nextWeek"
+      />
+      <label for="nextWeek">Next week </label>
+    </div>
+    <div class="flex gap-2">
+      <input
+        type="checkbox"
+        name="nextMonth"
+        class="filter"
+        v-model="filters.nextMonth"
+        @click="toggleFilters"
+        :disabled="filters.nextMonth"
+      />
+      <label for="nextMonth">Next month </label>
+    </div>
+  </div>
   <div
     v-for="document in reservationDocuments"
     class="w-full h-auto bg-[#0f172a] rounded p-2 text-white flex flex-col gap-2 overflow-visible relative"
@@ -37,6 +72,11 @@ export default {
     const reservationDocuments = ref([]);
     const db = inject("firestore");
     const auth = inject("auth");
+    const filters = ref({
+      showAll: true,
+      nextWeek: false,
+      nextMonth: false,
+    });
 
     const getDocuments = async () => {
       const user = auth.currentUser;
@@ -70,6 +110,66 @@ export default {
       getDocuments();
     };
 
+    const toggleFilters = () => {
+      if (!filters.value.showAll) {
+        showAll();
+      } else if (!filters.value.nextWeek) {
+        showNextWeek();
+      } else if (!filters.value.nextMonth) {
+        showNextMonth();
+      }
+    };
+
+    const showAll = () => {
+      filters.value.nextWeek = false;
+      filters.value.nextMonth = false;
+      reservationDocuments.value = [];
+      getDocuments();
+    };
+
+    const showNextWeek = () => {
+      const currentDate = new Date();
+      const nextWeek = new Date(currentDate);
+
+      filters.value.showAll = false;
+      filters.value.nextMonth = false;
+      reservationDocuments.value = reservationDocuments.value.filter((item) => {
+        if (
+          item.selectedDate.seconds * 1000 <=
+          nextWeek.setDate(nextWeek.getDate() + 7)
+        ) {
+          return true;
+        }
+      });
+    };
+
+    const showNextMonth = () => {
+      const currentDate = new Date();
+
+      const currentMonth = currentDate.getMonth();
+      const currentYear = currentDate.getFullYear();
+
+      filters.value.showAll = false;
+      filters.value.nextWeek = false;
+
+      let nextMonth = currentMonth + 1;
+      let nextYear = currentYear;
+
+      if (nextMonth > 11) {
+        nextMonth = 0;
+        nextYear += 1;
+      }
+
+      const nextMonthDate = new Date(nextYear, nextMonth, 1);
+
+      if (
+        item.selectedDate.seconds * 1000 >=
+        nextMonthDate.setDate(nextMonthDate.getDate())
+      ) {
+        return true;
+      }
+    };
+
     onBeforeMount(() => {
       getDocuments();
     });
@@ -77,6 +177,8 @@ export default {
     return {
       reservationDocuments,
       deleteReservation,
+      filters,
+      toggleFilters,
     };
   },
 };

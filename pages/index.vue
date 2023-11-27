@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-center bg-[#94a3b8] items-center w-full h-screen gap-2 px-6"
+    class="flex justify-center sm:bg-[#ffff] bg-[#94a3b8] items-center w-full h-screen gap-2 px-6"
   >
     <div class="text flex flex-col items-center text-2xl gap-6 w-2/4 px-3">
       <h1>
