@@ -1,8 +1,8 @@
 <template>
-  <div class="px-5 bg-[#94a3b8] h-screen">
+  <div class="px-5 bg-[#94a3b8] h-full w-full flex flex-col">
     <div class="header-container">
       <header class="w-full flex justify-center">
-        <h1 class="text-4xl">Create a new reservation</h1>
+        <h1 class="text-2xl">New reservation</h1>
       </header>
     </div>
     <div class="form-container">

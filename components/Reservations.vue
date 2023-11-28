@@ -1,45 +1,42 @@
 <template>
-  <h1 class="text-2xl text-white text-center">My reservations</h1>
+  <h1 class="text-xl text-white text-center">My reservations</h1>
   <div class="filters flex justify-evenly">
     <div class="flex gap-2">
       <input
         type="checkbox"
-        class="filter"
         name="all"
         v-model="filters.showAll"
         @click="toggleFilters"
         :disabled="filters.showAll"
       />
-      <label for="all">All </label>
+      <label for="all" class="text-xs sm:text-base">All </label>
     </div>
     <div class="flex gap-2">
       <input
         type="checkbox"
         name="nextWeek"
-        class="filter"
         v-model="filters.nextWeek"
         @click="toggleFilters"
         :disabled="filters.nextWeek"
       />
-      <label for="nextWeek">Next week </label>
+      <label for="nextWeek" class="text-xs sm:text-base">Next week </label>
     </div>
     <div class="flex gap-2">
       <input
         type="checkbox"
         name="nextMonth"
-        class="filter"
         v-model="filters.nextMonth"
         @click="toggleFilters"
         :disabled="filters.nextMonth"
       />
-      <label for="nextMonth">Next month </label>
+      <label for="nextMonth" class="text-xs sm:text-base">Next month </label>
     </div>
   </div>
   <div
     v-for="document in reservationDocuments"
-    class="w-full h-auto bg-[#0f172a] rounded p-2 text-white flex flex-col gap-2 overflow-visible relative"
+    class="w-full h-auto bg-[#0f172a] rounded p-2 text-sm sm:text-base text-white flex flex-col gap-2 overflow-visible relative"
   >
-    <h2 class="description font-bold text-lg overflow-auto">
+    <h2 class="description font-bold text-base sm:text-xl overflow-auto">
       {{ document.description }}
     </h2>
     <h2>{{ document.fullName }}</h2>

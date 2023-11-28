@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="w-full h-13 py-4 flex gap-2 justify-center items-center bg-[#112337] text-white"
+    class="w-full h-13 py-4 flex gap-2 justify-center items-center bg-[#112337] text-white mb-6"
   >
     <NuxtLink to="/">
       <button class="p-2 bg-[#113946] hover:bg-[#475569] rounded">Home</button>
@@ -29,11 +29,20 @@
 import { useUserStore } from "../store/user";
 import { signOut } from "firebase/auth";
 import { inject } from "vue";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default {
   setup() {
     const auth = inject("auth");
     const userStore = useUserStore();
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        return;
+      }
+
+      userStore.userData.userLoggedIn = true;
+    });
 
     const logout = async () => {
       try {
@@ -48,6 +57,7 @@ export default {
     return {
       userStore,
       logout,
+      auth,
     };
   },
 };
