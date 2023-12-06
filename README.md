@@ -1,4 +1,4 @@
-#Reservations App
+# Reservations App
 
 This is an app in which users are able to select a specific date and time from a calendar implemented with the library "v-calendar", place their first and last name and a description for their reservation and that reservation will appear in the dashboard that can be found on the home page. The users will alse receive and e-mail with all the reservation details. The email service was implemented using "emailjs".
 
