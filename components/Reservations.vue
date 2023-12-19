@@ -2,32 +2,24 @@
   <h1 class="text-xl text-white text-center">My reservations</h1>
   <div class="filters flex justify-evenly">
     <div class="flex gap-2">
-      <input
-        type="checkbox"
-        name="all"
-        v-model="filters.showAll"
-        @click="toggleFilters"
-        :disabled="filters.showAll"
-      />
+      <input value="all" type="radio" name="filter" v-model="currentFilter" />
       <label for="all" class="text-xs sm:text-base">All </label>
     </div>
     <div class="flex gap-2">
       <input
-        type="checkbox"
-        name="nextWeek"
-        v-model="filters.nextWeek"
-        @click="toggleFilters"
-        :disabled="filters.nextWeek"
+        value="nextWeek"
+        type="radio"
+        name="filter"
+        v-model="currentFilter"
       />
       <label for="nextWeek" class="text-xs sm:text-base">Next week </label>
     </div>
     <div class="flex gap-2">
       <input
-        type="checkbox"
-        name="nextMonth"
-        v-model="filters.nextMonth"
-        @click="toggleFilters"
-        :disabled="filters.nextMonth"
+        value="nextMonth"
+        type="radio"
+        name="filter"
+        v-model="currentFilter"
       />
       <label for="nextMonth" class="text-xs sm:text-base">Next month </label>
     </div>
@@ -50,6 +42,7 @@
       <i class="fa-solid fa-trash-can"></i>
     </button>
   </div>
+  <p>{{ cutoffDate }}</p>
 </template>
 
 <script>
@@ -63,17 +56,34 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { inject } from "vue";
+import { useUserStore } from "../store/user";
 
 export default {
   setup() {
     const reservationDocuments = ref([]);
+    const userStore = useUserStore();
     const db = inject("firestore");
     const auth = inject("auth");
-    const filters = ref({
-      showAll: true,
-      nextWeek: false,
-      nextMonth: false,
+    const currentFilter = ref("all");
+    const cutoffDate = computed(() => {
+      return getCutoffDateByFilterType(currentFilter);
     });
+    const isAdmin = userStore.userData.isAdmin;
+
+    const getCutoffDateByFilterType = (filterType) => {
+      const currentDate = new Date();
+      if (filterType.value === "all") {
+        return new Date();
+      } else if (filterType.value === "nextWeek") {
+        return new Date(
+          new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000)
+        );
+      } else if (filterType.value === "nextMonth") {
+        return new Date(
+          new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
+        );
+      }
+    };
 
     const getDocuments = async () => {
       const user = auth.currentUser;
@@ -82,19 +92,18 @@ export default {
         return;
       }
 
-      const userAdminDoc = doc(db, "users", "04oZeeW25fgRQG4ISdXI");
-      const queryAdminSnapshot = await getDoc(userAdminDoc);
+      const queryArguments = [collection(db, "reservations")];
+      queryArguments.push(where("selectedDate", ">=", cutoffDate.value));
 
-      const documentsByUserQuery = query(
-        collection(db, "reservations"),
-        where("userId", "==", user.uid)
-      );
+      if (!isAdmin) {
+        queryArguments.push(where("userId", "==", user.uid));
+      }
 
-      const querySnapshot = await getDocs(
-        user.uid === queryAdminSnapshot.data().uid
-          ? collection(db, "reservations")
-          : documentsByUserQuery
-      );
+      const documentsByUserQuery = query(...queryArguments);
+
+      const querySnapshot = await getDocs(documentsByUserQuery);
+
+      reservationDocuments.value = [];
 
       querySnapshot.forEach((doc) => {
         reservationDocuments.value.push({ ...doc.data(), docId: doc.id });
@@ -107,75 +116,19 @@ export default {
       getDocuments();
     };
 
-    const toggleFilters = () => {
-      if (!filters.value.showAll) {
-        showAll();
-      } else if (!filters.value.nextWeek) {
-        showNextWeek();
-      } else if (!filters.value.nextMonth) {
-        showNextMonth();
-      }
-    };
-
-    const showAll = () => {
-      filters.value.nextWeek = false;
-      filters.value.nextMonth = false;
-      reservationDocuments.value = [];
-      getDocuments();
-    };
-
-    const showNextWeek = () => {
-      const currentDate = new Date();
-      const nextWeek = new Date(currentDate);
-
-      filters.value.showAll = false;
-      filters.value.nextMonth = false;
-      reservationDocuments.value = reservationDocuments.value.filter((item) => {
-        if (
-          item.selectedDate.seconds * 1000 <=
-          nextWeek.setDate(nextWeek.getDate() + 7)
-        ) {
-          return true;
-        }
-      });
-    };
-
-    const showNextMonth = () => {
-      const currentDate = new Date();
-
-      const currentMonth = currentDate.getMonth();
-      const currentYear = currentDate.getFullYear();
-
-      filters.value.showAll = false;
-      filters.value.nextWeek = false;
-
-      let nextMonth = currentMonth + 1;
-      let nextYear = currentYear;
-
-      if (nextMonth > 11) {
-        nextMonth = 0;
-        nextYear += 1;
-      }
-
-      const nextMonthDate = new Date(nextYear, nextMonth, 1);
-
-      if (
-        item.selectedDate.seconds * 1000 >=
-        nextMonthDate.setDate(nextMonthDate.getDate())
-      ) {
-        return true;
-      }
-    };
-
     onBeforeMount(() => {
+      getDocuments();
+    });
+
+    watch(cutoffDate, () => {
       getDocuments();
     });
 
     return {
       reservationDocuments,
       deleteReservation,
-      filters,
-      toggleFilters,
+      currentFilter,
+      cutoffDate,
     };
   },
 };
@@ -198,3 +151,7 @@ export default {
   border-radius: 5px;
 }
 </style>
+
+<!-- v-model="filters.showAll" @click="toggleFilters" :disabled="filters.showAll"
+v-model="filters.nextWeek" @click="toggleFilters" :disabled="filters.nextWeek"
+v-model="filters.nextMonth" @click="toggleFilters" :disabled="filters.nextMonth" -->
