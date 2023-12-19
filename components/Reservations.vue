@@ -69,7 +69,6 @@ export default {
       return getCutoffDateByFilterType(currentFilter);
     });
     const isAdmin = userStore.userData.isAdmin;
-    const currentUserId = auth.currentUser.uid;
 
     const getCutoffDateByFilterType = (filterType) => {
       const currentDate = new Date();

@@ -59,15 +59,14 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 export default {
   setup() {
     const auth = inject("auth");
-    const db = inject("firestore");
 
     const loginShowAlert = ref(false);
     const loginMessage = ref("");
     const loginColor = ref("");
 
     const loginDetails = ref({
-      email: "admin@admin.com",
-      password: "admin123",
+      email: "",
+      password: "",
     });
 
     const submitLogInInformation = async () => {
@@ -75,13 +74,12 @@ export default {
       loginMessage.value = "Please wait! You are being logged in";
       loginColor.value = "bg-blue-500";
       try {
-        const loginResult = await signInWithEmailAndPassword(
+        await signInWithEmailAndPassword(
           auth,
           loginDetails.value.email,
           loginDetails.value.password
         );
 
-        console.log(loginResult.user.uid, "*");
         loginMessage.value = "Congratulations! You logged in successfully ";
         loginColor.value = "bg-green-500";
       } catch (error) {
