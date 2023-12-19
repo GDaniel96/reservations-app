@@ -1,10 +1,10 @@
 <template>
   <div
     class="text-white text-center text-sm font-bold p-4"
-    :class="login_color"
-    v-if="login_show_alert"
+    :class="loginColor"
+    v-if="loginShowAlert"
   >
-    {{ login_message }}
+    {{ loginMessage }}
   </div>
   <VForm
     class="bg-[#1e293b] shadow-md rounded-tl-none px-8 pt-6 pb-8 mb-4"
@@ -55,52 +55,47 @@
 
 <script>
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useUserStore } from "~/store/user";
 
 export default {
   setup() {
     const auth = inject("auth");
-    const userStore = useUserStore();
+    const db = inject("firestore");
 
-    const login_show_alert = ref(false);
-    const login_message = ref("");
-    const login_color = ref("");
+    const loginShowAlert = ref(false);
+    const loginMessage = ref("");
+    const loginColor = ref("");
 
     const loginDetails = ref({
-      email: "",
-      password: "",
+      email: "admin@admin.com",
+      password: "admin123",
     });
 
     const submitLogInInformation = async () => {
-      login_show_alert.value = true;
-      login_message.value = "Please wait! You are being logged in";
-      login_color.value = "bg-blue-500";
+      loginShowAlert.value = true;
+      loginMessage.value = "Please wait! You are being logged in";
+      loginColor.value = "bg-blue-500";
       try {
-        await signInWithEmailAndPassword(
+        const loginResult = await signInWithEmailAndPassword(
           auth,
           loginDetails.value.email,
           loginDetails.value.password
         );
 
-        login_show_alert.value = true;
-        login_message.value = "Congratulations! You logged in successfully ";
-        login_color.value = "bg-green-500";
-
-        userStore.userData.userLoggedIn = true;
+        console.log(loginResult.user.uid, "*");
+        loginMessage.value = "Congratulations! You logged in successfully ";
+        loginColor.value = "bg-green-500";
       } catch (error) {
-        console.log(error.code);
-        login_show_alert.value = true;
-        login_message.value = `Ups! There is an error: ${error.code}`;
-        login_color.value = "bg-red-500";
+        loginMessage.value = `Ups! There is an error: ${error.code}`;
+        loginColor.value = "bg-red-500";
       }
     };
 
     return {
       loginDetails,
       submitLogInInformation,
-      login_show_alert,
-      login_message,
-      login_color,
+      loginShowAlert,
+      loginMessage,
+      loginColor,
     };
   },
 };

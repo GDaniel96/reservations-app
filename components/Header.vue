@@ -29,20 +29,11 @@
 import { useUserStore } from "../store/user";
 import { signOut } from "firebase/auth";
 import { inject } from "vue";
-import { onAuthStateChanged } from "firebase/auth";
 
 export default {
   setup() {
     const auth = inject("auth");
     const userStore = useUserStore();
-
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        return;
-      }
-
-      userStore.userData.userLoggedIn = true;
-    });
 
     const logout = async () => {
       try {

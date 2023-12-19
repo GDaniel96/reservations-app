@@ -4,8 +4,8 @@
       <div
         class="w-1/2 text-center p-4 bg rounded-t text-sm"
         :class="{
-          'bg-[#1e293b]': userHasAccount,
-          'bg-[#334155]': !userHasAccount,
+          'bg-[#1e293b]': loginFormVisible,
+          'bg-[#334155]': !loginFormVisible,
         }"
       >
         <a href="#" @click="switchAuthenticationForm">Login</a>
@@ -13,8 +13,8 @@
       <div
         class="w-1/2 text-center p-4 rounded-t text-sm"
         :class="{
-          'bg-[#1e293b]': !userHasAccount,
-          'bg-[#334155]': userHasAccount,
+          'bg-[#1e293b]': !loginFormVisible,
+          'bg-[#334155]': loginFormVisible,
         }"
       >
         <a href="#" @click="switchAuthenticationForm">Register</a>
@@ -22,7 +22,7 @@
     </div>
 
     <div class="form-container">
-      <LoginForm v-if="userHasAccount" />
+      <LoginForm v-if="loginFormVisible" />
       <RegisterForm v-else />
     </div>
   </section>
@@ -34,11 +34,11 @@ import RegisterForm from "./RegisterForm.vue";
 
 export default {
   setup() {
-    const userHasAccount = ref(true);
+    const loginFormVisible = ref(true);
     const switchAuthenticationForm = () => {
-      userHasAccount.value = !userHasAccount.value;
+      loginFormVisible.value = !loginFormVisible.value;
     };
-    return { userHasAccount, switchAuthenticationForm };
+    return { loginFormVisible, switchAuthenticationForm };
   },
 
   components: {

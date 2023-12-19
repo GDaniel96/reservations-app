@@ -1,0 +1,187 @@
+"use strict";(self.__LOADABLE_LOADED_CHUNKS__=self.__LOADABLE_LOADED_CHUNKS__||[]).push([[390],{94321:(e,t,r)=>{r.d(t,{LV:()=>p});r(2784);var n=r(5769),a=(r(82001),r(23575),r(82526),r(76733),r(97301));a.ZP`
+  query GeneratePlayerMatchLeadTimelineAverages(
+    $championId: Int
+    $patchVersion: String
+    $queueId: Int
+    $summonerName: String!
+    $regionId: String!
+    $role: Int
+    $seasonId: Int
+  ) {
+    generatePlayerMatchLeadTimelineAverages(
+      championId: $championId
+      patchVersion: $patchVersion
+      queueId: $queueId
+      regionId: $regionId
+      role: $role
+      seasonId: $seasonId
+      summonerName: $summonerName
+    ) {
+      csLeadAvgList
+      goldLeadAvgList
+      xpLeadAvgList
+    }
+  }
+`,a.ZP`
+  query GeneratePlayerMatchTimelineAverages(
+    $championId: Int
+    $patchVersion: String
+    $queueId: Int
+    $summonerName: String!
+    $regionId: String!
+    $role: Int
+    $seasonId: Int
+  ) {
+    generatePlayerMatchTimelineAverages(
+      championId: $championId
+      patchVersion: $patchVersion
+      queueId: $queueId
+      regionId: $regionId
+      role: $role
+      seasonId: $seasonId
+      summonerName: $summonerName
+    ) {
+      csAvgList
+      goldAvgList
+      xpAvgList
+    }
+  }
+`,a.ZP`
+  query GeneratePlayerChampionStats(
+    $summonerName: String!
+    $regionId: String!
+    $seasonId: Int!
+    $championId: Int!
+    $role: String
+    $queueId: Int!
+  ) {
+    generatePlayerChampionStats(
+      summonerName: $summonerName
+      regionId: $regionId
+      seasonId: $seasonId
+      championId: $championId
+      role: $role
+      queueId: $queueId
+    ) {
+      gamesPlayed
+      averageKills
+      averageDeaths
+      averageAssists
+      winRate
+      wins
+      losses
+      totalDoubleKills
+      totalTripleKills
+      totalQuadraKills
+      totalPentaKills
+      maxKills
+      maxDeaths
+      averageCs
+      averageDamage
+      averageGold
+      xpLeadAtFifteen
+      goldLeadAtFifteen
+      killLeadAtFifteen
+      csLeadAtFifteen
+    }
+  }
+`,a.ZP`
+  query GetCommonlyVersedOpponentChampions(
+    $summonerName: String!
+    $regionId: String!
+    $seasonId: Int!
+    $championId: Int!
+    $role: String
+    $queueId: Int!
+  ) {
+    getCommonlyVersedOpponentChampions(
+      summonerName: $summonerName
+      regionId: $regionId
+      seasonId: $seasonId
+      championId: $championId
+      role: $role
+      queueId: $queueId
+    ) {
+      opponentChampion
+      totalWinsAgainst
+      totalLossesAgainst
+      winRate
+    }
+  }
+`,a.ZP`
+  query GetPlayerChampionStatsMaxAndAvgScores(
+    $summonerName: String!
+    $regionId: String!
+    $seasonId: Int!
+    $championId: Int!
+    $role: String
+    $queueId: Int!
+  ) {
+    getPlayerChampionStatsMaxAndAvgScores(
+      summonerName: $summonerName
+      regionId: $regionId
+      seasonId: $seasonId
+      championId: $championId
+      role: $role
+      queueId: $queueId
+    ) {
+      averageDamageShare
+      averageEfficiency
+      averageGoldShare
+      averageHardcarry
+      averageTeamplay
+      averageKillParticipation
+      averageLevelDifference
+      averagePsDamageShare
+      averagePsGoldShare
+      averagePsKillParticipation
+      averagePsLevelDifference
+      averagePsVisionScore
+      averagePsEfficiency
+      averageVisionScore
+      maxPsDamageShare
+      maxPsEfficiency
+      maxPsGoldShare
+      maxPsKillParticipation
+      maxPsLevelDifference
+      maxPsVisionScore
+    }
+  }
+`,a.ZP`
+  query GetOverallChampionStats($championId: Int!, $role: String, $queueId: Int) {
+    getOverallChampionStats(championId: $championId, role: $role, queueId: $queueId) {
+      damageShare
+      efficiency
+      finalLvlDiff
+      goldShare
+      killParticipation
+      visionScore
+    }
+  }
+`;var o=r(72632),i=(r(80645),Object.defineProperty),s=Object.getOwnPropertySymbols,l=Object.prototype.hasOwnProperty,c=Object.prototype.propertyIsEnumerable,u=(e,t,r)=>t in e?i(e,t,{enumerable:!0,configurable:!0,writable:!0,value:r}):e[t]=r,d=(e,t)=>{for(var r in t||(t={}))l.call(t,r)&&u(e,r,t[r]);if(s)for(var r of s(t))c.call(t,r)&&u(e,r,t[r]);return e};function p(e,t={}){const r=function(e){return{championId:parseInt(e)||-1}}(e);return(0,n.a)(o.T,d({variables:r,ssr:!1},t))}},84782:(e,t,r)=>{r.d(t,{x:()=>l,z:()=>c});var n=r(47283),a=r(40398),o=r.n(a),i=r(82001);function s(e,t,r){return`${e}_${t}_${r}`}function l(e){let t={};for(const[r,a]of Object.entries(e))for(const[e,i]of Object.entries(a))for(const[a,l]of Object.entries(i)){let[i,c]=l,u=0;i=i.map((e=>{const t=e[2];return u+=t,{role:e[10],champion_id:e[0],champion_link:{champion_id:e[0],role:e[10]},wins:e[1],matches:e[2],win_rate:o()(e[1]/e[2]*100,2),xp_adv_15:o()(e[3]/t,0),gold_adv_15:o()(e[4]/t,0),cs_adv_15:o()(e[5]/t,1),kill_adv_15:o()(e[6]/t,2),carry_percentage_15:o()(e[7]/t*10,0),duo_carry_percentage_15:o()(e[8]/t*10,0),team_gold_difference_15:o()(e[9]/t)}})),i.forEach((e=>{const t=o()(e.matches/u*100,2);e.pick_rate=t,e.tier={pick_rate:t,win_rate:e.win_rate}})),i.sort(((e,t)=>e.pick_rate>=.5&&t.pick_rate>=.5?e.win_rate>t.win_rate?1:e.win_rate<t.win_rate?-1:0:e.pick_rate>=.5&&t.pick_rate<.5?1:e.pick_rate<.5&&t.pick_rate>=.5?-1:e.pick_rate<.5&&t.pick_rate<.5?e.win_rate>t.win_rate?1:e.win_rate<t.win_rate?-1:0:0));const d={duos:i,last_updated:c};t[s(n.N5[r],n.YA[e],n.Zv[a])]=d}return t}function c(e,t){let{queueType:r,region:n,rank:a,role:o}=t;return e?("normal_aram"===r||"nexus_blitz"==r?(a="overall",o="none"):"normal_blind_5x5"===r||"normal_draft_5x5"===r?(a="overall",o=(0,i.UA)(o)):o=(0,i.UA)(o),e[s(n,a,o)]):null}},6343:(e,t,r)=>{r.d(t,{YT:()=>c,ib:()=>s,nf:()=>l});var n=r(47283),a=r(40398),o=r.n(a),i=(r(82001),r(99572),r(6717));function s(e){let t={};for(const[r,a]of Object.entries(e))for(const[e,s]of Object.entries(a))for(const[a,l]of Object.entries(s)){let[s,c,u,d,p,m,_,v,h,f,g,k]=l[0];h=Array.isArray(h)&&h.length>0?{matches:h[0],wins:h[1],win_rate:o()(h[1]/h[0]*100,2),activeShards:h[2]}:null;const y=l[1];s=0!==s.length?{matches:s[0],wins:s[1],win_rate:o()(s[1]/s[0]*100,2),primary_style:s[2],sub_style:s[3],active_perks:s[4]}:null,[c,u,d]=[c,u,d].map((e=>e&&0!==e.length?{matches:e[0],wins:e[1],win_rate:o()(e[1]/e[0]*100,2),items:e[2]}:null));const $={items:p&&p[3]?p[3].split(""):[]};p=p&&0!==p.length?{matches:p[0],wins:p[1],win_rate:o()(p[1]/p[0]*100,2),items:p[2]}:{},f=f&&0!==f.length?{matches:f[0],wins:f[1],win_rate:o()(f[1]/f[0]*100,2),items:f[2].split("")}:{};let[w,b,I,P]=m;[w,b,I,P]=[w,b,I,P].map((e=>(e||[]).map((e=>({wins:e[1],matches:e[2],win_rate:o()(e[1]/e[2]*100,2),item_id:e[0]})))));const T=_[0],q=_[1],O=T>=0&&q>0?o()(T/q*100,2):null,j=(g||[]).map((e=>({championId:e[0],avgPlacement:o()((e[4]||0)/e[2],2),firstRate:o()((e[3]||0)/e[2]*100,2),top2Rate:o()((e[1]||0)/e[2]*100,2),pickRate:o()((e[3]||0)/q*100,2),matches:e[3]}))),C=(k||[]).map((e=>({augmentId:e[0],pickRate:o()(e[2]/q*100,2),matches:e[2]}))),x={stat_shards:h,rec_runes:s,rec_summoner_spells:c,rec_starting_items:u,rec_core_items:d,rec_skills:$,rec_skill_path:p,rec_skill_evolve_path:f,item_options_1:w,item_options_2:b,item_options_3:I,consumable_options:P,wins:T,matches:q,win_rate:O,build_warning:v,last_updated:y,arena_synergies:j,arena_augments:C};t[(0,i.k)(n.N5[r],n.YA[e],n.Zv[a])]=x}return t}function l(e){let t={};for(const[r,a]of Object.entries(e))for(const[e,s]of Object.entries(a))for(const[a,l]of Object.entries(s)){let[s,c,u,d,p,m,_]=l;s=s.map((e=>{const t=e[5].map((e=>({primary_style:e[0],sub_style:e[1],wins:e[3],matches:e[4],win_rate:o()(e[3]/e[4]*100,2),active_perks:e[2]})));return{keystone_id:e[0],primary_style:e[4],sub_style:e[1],wins:e[2],matches:e[3],win_rate:o()(e[2]/e[3]*100,2),runes:t}})),[c,u,_,p,m,d]=[c,u,_,p,m,d].map((e=>e.map((e=>0===e.length?null:{matches:e[2],wins:e[1],win_rate:o()(e[1]/e[2]*100,2),items:Array.isArray(e[0])?e[0]:[e[0]]}))));const v={keystone_pairs:s,summoner_spells:c,starting_items:u,core_items:_,skills:p,boots:m,core_items_with_boots:d};t[(0,i.k)(n.N5[r],n.YA[e],n.Zv[a])]=v}return t}function c(e,t){return(0,i.a)(e,t)}},6717:(e,t,r)=>{r.d(t,{a:()=>i,k:()=>o});var n=r(99572),a=r(82001);function o(e,t,r){return`${e}_${t}_${r}`}function i(e,t){let{queueType:r,region:i,rank:s,role:l}=t;if(!e)return null;let c=(0,n.PV)(r);return c?(c.hasRank||(s="overall"),l=c.hasRole?(0,a.UA)(l):"none"):"normal_blind_5x5"===r||"normal_draft_5x5"===r?(s="overall",l=(0,a.UA)(l)):l=(0,a.UA)(l),e[o(i,s,l)]}},47283:(e,t,r)=>{r.d(t,{N5:()=>n,YA:()=>a,Zv:()=>o});const n={1:"na1",2:"euw1",3:"kr",4:"eun1",5:"br1",6:"la1",7:"la2",8:"oc1",9:"ru",10:"tr1",11:"jp1",12:"world",13:"ph2",14:"sg2",15:"th2",16:"tw2",17:"vn2"},a={1:"challenger",2:"master",3:"diamond",4:"platinum",5:"gold",6:"silver",7:"bronze",8:"overall",9:"unknown",10:"platinum_plus",11:"diamond_plus",12:"iron",13:"grandmaster",14:"master_plus",15:"diamond_2_plus",16:"emerald",17:"emerald_plus"},o={1:"jungle",2:"supp",3:"adc",4:"top",5:"mid",6:"none",8:"lane"}},73565:(e,t,r)=>{r.d(t,{k:()=>c,z:()=>l});var n=r(47283),a=r(40398),o=r.n(a),i=r(82001);function s(e,t,r){return`${e}_${t}_${r}`}function l(e){let t={};for(const[r,a]of Object.entries(e))for(const[e,i]of Object.entries(a))for(const[a,l]of Object.entries(i)){const[i,c,u,d,p,m,_]=l.map((e=>{let t=0;return e.forEach((e=>t+=e[2])),e.map((e=>{const r=e[1],n=e[2];return{item_id:Array.isArray(e[0])?e[0]:[e[0]],wins:e[1],matches:e[2],win_rate:o()(r/n*100,2),pick_rate:o()(n/t*100,2)}}))})),v={starting_items:i,items_1:c,boots:u,items_2:d,items_3:p,items_4:m,items_5:_};t[s(n.N5[r],n.YA[e],n.Zv[a])]=v}return t}function c(e,t){let{queueType:r,region:n,rank:a,role:o}=t;return e?("normal_aram"===r||"nexus_blitz"==r?(a="overall",o="none"):"normal_blind_5x5"===r||"normal_draft_5x5"===r?(a="overall",o=(0,i.UA)(o)):o=(0,i.UA)(o),e[s(n,a,o)]):null}},39765:(e,t,r)=>{r.d(t,{DP:()=>c,Qh:()=>u});var n=r(47283),a=r(40398),o=r.n(a),i=r(82001);function s(e,t){return`${e}_${t}`}function l(e,t,r){return`${e}_${t}_${r}`}function c(e){let t={},r={};for(const[a,i]of Object.entries(e))for(const[e,c]of Object.entries(i))for(const[i,u]of Object.entries(c)){const c=s(n.N5[a],n.YA[e]);c in r||(r[c]=[]),r[c].push(n.Zv[i]);let d=0;const p={counters:u[0].map((e=>{const t=e[2];return d+=t,{champion_id:e[0],win_rate:o()(100*(1-e[1]/t),2),matches:t,xp_adv_15:o()(e[3]/t*-1,0),gold_adv_15:o()(e[4]/t*-1,0),duo_gold_adv_15:o()(e[5]/t*-1,0),cs_adv_15:o()(e[6]/t*-1,1),duo_cs_adv_15:o()(e[7]/t*-1,1),jungle_cs_adv_15:o()(e[8]/t*-1,1),kill_adv_15:o()(e[9]/t*-1,2),duo_kill_adv_15:o()(e[10]/t*-1,2),duo_xp_adv_15:o()(e[11]/t*-1,0),carry_percentage_15:o()(e[12]/t*-1*10,0),duo_carry_percentage_15:o()(e[13]/t*-1*10,0),team_gold_difference_15:o()(e[14]/t*-1,0)}})),last_updated:u[1],matches:d};p.counters.forEach((e=>{const t=o()(e.matches/d*100,2);e.pick_rate=t,e.tier={pick_rate:t,win_rate:e.win_rate}})),p.counters.sort(((e,t)=>e.pick_rate>=.5&&t.pick_rate>=.5?e.win_rate>t.win_rate?1:e.win_rate<t.win_rate?-1:0:e.pick_rate>=.5&&t.pick_rate<.5?1:e.pick_rate<.5&&t.pick_rate>=.5?-1:e.pick_rate<.5&&t.pick_rate<.5?e.win_rate>t.win_rate?1:e.win_rate<t.win_rate?-1:0:0));t[l(n.N5[a],n.YA[e],n.Zv[i])]=p}return{matchups:t,roles:r}}function u(e,t){const{region:r,rank:n,role:a}=t;return e?e[l(r,n,(0,i.UA)(a))]:null}},74326:(e,t,r)=>{r.d(t,{A:()=>c,G:()=>l});var n=r(47283),a=r(40398),o=r.n(a),i=(r(82001),r(6717));function s(e,t,r){return isNaN(e)||isNaN(r)||isNaN(t)?null:0===e&&0===r&&0===t?"0.00":0===t?"Perfect":o()((e+r)/t,2).toFixed(2)}function l(e){let t={};for(const[r,a]of Object.entries(e))for(const[e,l]of Object.entries(a))for(const[a,c]of Object.entries(l)){let[l,u,d,p,m,_,v,h,f,g,k,y,$,w,b,I,P,T,q,O]=c;$=$.map((e=>{const t=e[2];return{champion_id:e[0],wins:e[1],matches:t,win_rate:o()(e[1]/t*100,2)}}));const j={wins:l,matches:u,rank:d,total_rank:p,avg_damage:m/u,avg_gold:_/u,avg_kda:s(v,f,h),avg_cs:o()(g/u,0),win_rate:o()(l/u*100,2),pick_rate:o()(u/y*100,1),ban_rate:0!==w&&null!=w?o()(k/w*100,1):o()(k/y*100,1),total_matches:y,counters:$,stdevs:b,effective_winrate:I,matches:u,bans:k,real_matches:w,total_matches:y,distribution_count:P,distribution_mean:T,distribution_stdevs:q,be_all_picks:O};t[(0,i.k)(n.N5[r],n.YA[e],n.Zv[a])]=j}return t}function c(e,t){return(0,i.a)(e,t)}},83209:(e,t,r)=>{r.d(t,{$:()=>c,C:()=>l});var n=r(47283),a=r(40398),o=r.n(a),i=r(82001);function s(e,t,r){return`${e}_${t}_${r}`}function l(e,t){let r={};for(const[t,a]of Object.entries(e))for(const[e,i]of Object.entries(a))for(const[a,l]of Object.entries(i)){let[i,c,u]=l;const d=(e,t=1)=>{let r=0;for(const[t,n]of Object.entries(e))r+=n[1];return Math.trunc(r/t)},p=d(i,1),m=d(c,3),_=d(u,2),v=Math.max(p,m,_);[i,c,u]=l.map(((e,t)=>{for(const[t,r]of Object.entries(e)){const n=r[0],a=r[1];e[t]={wins:n,matches:a,win_rate:o()(n/a*100,2),pick_rate:o()(a/v*100,2)}}return e}));const h={keystone:i,primary:c,secondary:u};r[s(n.N5[t],n.YA[e],n.Zv[a])]=h}return r}function c(e,t){let{queueType:r,region:n,rank:a,role:o}=t;return e?("normal_aram"===r||"nexus_blitz"==r?(a="overall",o="none"):"normal_blind_5x5"===r||"normal_draft_5x5"===r?(a="overall",o=(0,i.UA)(o)):o=(0,i.UA)(o),e[s(n,a,o)]):null}},72632:(e,t,r)=>{r.d(t,{T:()=>a,r:()=>o});var n=r(97301);const a=n.ZP`
+  query getChampionOtpStats($championId: Int!) {
+    getChampionOtpStats(championId: $championId) {
+      gamesPlayed
+      iconId
+      lp
+      regionId
+      summonerName
+      tier
+      rank
+      winRate
+    }
+  }
+`,o=n.ZP`
+  query getChampionOtpStats2($championId: Int!, $regionId: String!) {
+    getChampionOtpStats2(championId: $championId, regionId: $regionId) {
+      gamesPlayed
+      iconId
+      lp
+      regionId
+      summonerName
+      tier
+      rank
+      winRate
+    }
+  }
+`},32339:(e,t,r)=>{r.d(t,{G6:()=>ne,$d:()=>ee,Pe:()=>W,hG:()=>Q,Ls:()=>z,H$:()=>H,Gf:()=>J,NU:()=>X,CZ:()=>re,zT:()=>te,jj:()=>U,up:()=>Z,fR:()=>Y,uJ:()=>ae,Vg:()=>F});var n=r(2784),a=r(7267),o=r(27005),i=r(93344),s=r(8847),l=r(42861),c=r(22812),u=r(82001),d=r(62249),p=r(99572),m=r(94321),_=r(6343),v=r(74326);r(47283),r(40398);var h=r(39765),f=r(73565),g=r(83209),k=r(84782),y=r(82526),$=r(34675),w=r(13117);var b=r(6717);const I="overview_emerald_plus_world",P="overview_emerald_plus_world_ap",T="overview_emerald_plus_world_tank",q="overview_emerald_plus_world_ad",O="overview_emerald_plus_world_crit",j="overview_emerald_plus_world_lethality",C="overview_emerald_plus_world_onhit",x="overview_emerald_plus_world_ct",A="rankings_emerald_plus_world";var S=Object.defineProperty,N=Object.defineProperties,D=Object.getOwnPropertyDescriptors,K=Object.getOwnPropertySymbols,B=Object.prototype.hasOwnProperty,L=Object.prototype.propertyIsEnumerable,M=(e,t,r)=>t in e?S(e,t,{enumerable:!0,configurable:!0,writable:!0,value:r}):e[t]=r,E=(e,t)=>{for(var r in t||(t={}))B.call(t,r)&&M(e,r,t[r]);if(K)for(var r of K(t))L.call(t,r)&&M(e,r,t[r]);return e},R=(e,t)=>N(e,D(t));function F(e,t,{keepDefaultParams:r=!1,ssr:l}={}){const{useBackupChampions:p}=(0,d.Th)(),m=p(),_=(0,a.TH)(),v=(0,s.Nc)(),h=(0,o.h)(),{data:f}=Y({ssr:l}),g=h({queryParams:v,page:t,keepDefaultParams:r}),k=c.P[t],y="?"===_.search.charAt(0)?_.search.substring(1):_.search;!r&&g.queueType&&"ranked_solo_5x5"!==g.queueType&&"ranked_flex_sr"!==g.queueType&&delete g.opp;if(!("nexus_blitz"===g.queueType||"overview_nexus_blitz"===t)&&!r&&!_.state||_.state&&!_.state.persistRole){const t=f&&e in f?(0,i.tn)(f[e][0]):m[e]&&m[e].primaryRole?m[e].primaryRole:"middle",r=k&&k.default&&k.default.role;(!r&&g.role===t||t===r)&&delete g.role}const $=(0,u.s4)(g),w=y!==$?$:y;return(0,n.useMemo)((()=>({pathname:_.pathname,search:w,validatedParams:(0,u.dD)(w)})),[_.pathname,y,$])}function Y({skip:e,ssr:t}={}){const r=function(){const e=(0,$.v)(),t=(0,w.M)();if(e.data&&t.data){const r=e.data[0];return`${(0,y.cB)()}/primary_roles/${r}/${t.data[r].primary_roles}.json`}return null}();return(0,l.kc)(r,{skip:e||!r,ssr:t})}function Z(e,t){const{forcedParams:r,ssr:n,skip:a}=t||{},o={forcedParams:R(E({},r),{queueType:"nexus_blitz",region:"world"}),ssr:n,skip:a},{data:s,loading:l,error:c,params:u}=z(e,o),{queueType:d,region:p,rank:m}=u,v={[i.K$.LANE]:0,[i.K$.JUNGLE]:0};Object.keys(v).forEach((e=>{const{matches:t}=(0,_.YT)(s,{queueType:d,region:p,rank:m,role:e})||{};v[e]=t||0}));let h=Object.entries(v).sort(((e,t)=>t[1]-e[1]))[0][0];return{data:s?h:null,loading:l,error:c}}const G={141:[100141,200141]};function U(e,{forcedParams:t,ssr:r,queryParams:n}={}){const a={},o=Object.values(G).reduce(((e,t)=>Math.max(t.length,e)),1),i=Array(o).fill(0);return(G[e]?G[e].concat(i.slice(G[e].length)):[e].concat(i.slice(1))).map((e=>{let{data:r,loading:o,error:i}=e>1e4?V(e,{ssr:!0,forcedParams:t,skip:!n.opp}):z(e,{ssr:!0,forcedParams:t,skip:!n.opp}),{data:s,loading:c,error:u}=function(e,{forcedParams:t,ssr:r,skip:n}={}){const{getChampionIdByName:a}=(0,d.Th)(),{validatedParams:o}=F(e,"build",{keepDefaultParams:!0}),{data:i,loading:s}=Y({ssr:r}),c=E(E({},o),t),u=function(e,t){const{data:r}=(0,w.M)({apiKey:"overview",patch:t.patch});"ranked_solo_5x5"!==t.queueType&&"ranked_flex_sr"!==t.queueType&&delete t.opp,"arurf"===t.queueType&&(t.queueType="urf");const n=t.opp?`matchups/${e}_${t.opp}`:e;return[`${(0,y.cB)(t.patch)}/ap-overview`,t.patch,t.queueType,n,`${r}.json`].join("/")}(e,R(E({},c),{opp:a(c.opp)})),p=`${P}::${u}`,m=(0,l.kc)(u,{ssr:r,skip:n,customCacheKey:"world"===c.region&&"emerald_plus"===c.rank&&"ranked_solo_5x5"===c.queueType?p:"",onCompleted:(e,t,r)=>{const n=(0,_.ib)(t),a=(0,b.k)(c.region,c.rank,"");return r.match(P)?Object.fromEntries(Object.entries(n||{}).filter((([e,t])=>e.match(a)))):n}});return R(E({},m),{loading:s||m.loading})}(e%1e4,{ssr:!0,forcedParams:t,skip:n.opp}),{data:p,loading:m,error:v}=function(e,{forcedParams:t,ssr:r,skip:n}={}){const{getChampionIdByName:a}=(0,d.Th)(),{validatedParams:o}=F(e,"build",{keepDefaultParams:!0}),{data:i,loading:s}=Y({ssr:r}),c=E(E({},o),t),u=function(e,t){const{data:r}=(0,w.M)({apiKey:"overview",patch:t.patch});"ranked_solo_5x5"!==t.queueType&&"ranked_flex_sr"!==t.queueType&&delete t.opp,"arurf"===t.queueType&&(t.queueType="urf");const n=t.opp?`matchups/${e}_${t.opp}`:e;return[`${(0,y.cB)(t.patch)}/tank-overview`,t.patch,t.queueType,n,`${r}.json`].join("/")}(e,R(E({},c),{opp:a(c.opp)})),p=`${T}::${u}`,m=(0,l.kc)(u,{ssr:r,skip:n,customCacheKey:"world"===c.region&&"emerald_plus"===c.rank&&"ranked_solo_5x5"===c.queueType?p:"",onCompleted:(e,t,r)=>{const n=(0,_.ib)(t),a=(0,b.k)(c.region,c.rank,"");return r.match(T)?Object.fromEntries(Object.entries(n||{}).filter((([e,t])=>e.match(a)))):n}});return R(E({},m),{loading:s||m.loading})}(e%1e4,{ssr:!0,forcedParams:t,skip:n.opp}),{data:h,loading:f,error:g}=function(e,{forcedParams:t,ssr:r,skip:n}={}){const{getChampionIdByName:a}=(0,d.Th)(),{validatedParams:o}=F(e,"build",{keepDefaultParams:!0}),{data:i,loading:s}=Y({ssr:r}),c=E(E({},o),t),u=function(e,t){const{data:r}=(0,w.M)({apiKey:"overview",patch:t.patch});"ranked_solo_5x5"!==t.queueType&&"ranked_flex_sr"!==t.queueType&&delete t.opp,"arurf"===t.queueType&&(t.queueType="urf");const n=t.opp?`matchups/${e}_${t.opp}`:e;return[`${(0,y.cB)(t.patch)}/ad-overview`,t.patch,t.queueType,n,`${r}.json`].join("/")}(e,R(E({},c),{opp:a(c.opp)})),p=`${q}::${u}`,m=(0,l.kc)(u,{ssr:r,skip:n,customCacheKey:"world"===c.region&&"emerald_plus"===c.rank&&"ranked_solo_5x5"===c.queueType?p:"",onCompleted:(e,t,r)=>{const n=(0,_.ib)(t),a=(0,b.k)(c.region,c.rank,"");return r.match(q)?Object.fromEntries(Object.entries(n||{}).filter((([e,t])=>e.match(a)))):n}});return R(E({},m),{loading:s||m.loading})}(e%1e4,{ssr:!0,forcedParams:t,skip:n.opp}),{data:k,loading:$,error:I}=function(e,{forcedParams:t,ssr:r,skip:n}={}){const{getChampionIdByName:a}=(0,d.Th)(),{validatedParams:o}=F(e,"build",{keepDefaultParams:!0}),{data:i,loading:s}=Y({ssr:r}),c=E(E({},o),t),u=function(e,t){const{data:r}=(0,w.M)({apiKey:"overview",patch:t.patch});"ranked_solo_5x5"!==t.queueType&&"ranked_flex_sr"!==t.queueType&&delete t.opp,"arurf"===t.queueType&&(t.queueType="urf");const n=t.opp?`matchups/${e}_${t.opp}`:e;return[`${(0,y.cB)(t.patch)}/crit-overview`,t.patch,t.queueType,n,`${r}.json`].join("/")}(e,R(E({},c),{opp:a(c.opp)})),p=`${O}::${u}`,m=(0,l.kc)(u,{ssr:r,skip:n,customCacheKey:"world"===c.region&&"emerald_plus"===c.rank&&"ranked_solo_5x5"===c.queueType?p:"",onCompleted:(e,t,r)=>{const n=(0,_.ib)(t),a=(0,b.k)(c.region,c.rank,"");return r.match(O)?Object.fromEntries(Object.entries(n||{}).filter((([e,t])=>e.match(a)))):n}});return R(E({},m),{loading:s||m.loading})}(e%1e4,{ssr:!0,forcedParams:t,skip:n.opp}),{data:x,loading:A,error:S}=function(e,{forcedParams:t,ssr:r,skip:n}={}){const{getChampionIdByName:a}=(0,d.Th)(),{validatedParams:o}=F(e,"build",{keepDefaultParams:!0}),{data:i,loading:s}=Y({ssr:r}),c=E(E({},o),t),u=function(e,t){const{data:r}=(0,w.M)({apiKey:"overview",patch:t.patch});"ranked_solo_5x5"!==t.queueType&&"ranked_flex_sr"!==t.queueType&&delete t.opp,"arurf"===t.queueType&&(t.queueType="urf");const n=t.opp?`matchups/${e}_${t.opp}`:e;return[`${(0,y.cB)(t.patch)}/lethality-overview`,t.patch,t.queueType,n,`${r}.json`].join("/")}(e,R(E({},c),{opp:a(c.opp)})),p=`${j}::${u}`,m=(0,l.kc)(u,{ssr:r,skip:n,customCacheKey:"world"===c.region&&"emerald_plus"===c.rank&&"ranked_solo_5x5"===c.queueType?p:"",onCompleted:(e,t,r)=>{const n=(0,_.ib)(t),a=(0,b.k)(c.region,c.rank,"");return r.match(j)?Object.fromEntries(Object.entries(n||{}).filter((([e,t])=>e.match(a)))):n}});return R(E({},m),{loading:s||m.loading})}(e%1e4,{ssr:!0,forcedParams:t,skip:n.opp}),{data:N,loading:D,error:K}=function(e,{forcedParams:t,ssr:r,skip:n}={}){const{getChampionIdByName:a}=(0,d.Th)(),{validatedParams:o}=F(e,"build",{keepDefaultParams:!0}),{data:i,loading:s}=Y({ssr:r}),c=E(E({},o),t),u=function(e,t){const{data:r}=(0,w.M)({apiKey:"overview",patch:t.patch});"ranked_solo_5x5"!==t.queueType&&"ranked_flex_sr"!==t.queueType&&delete t.opp,"arurf"===t.queueType&&(t.queueType="urf");const n=t.opp?`matchups/${e}_${t.opp}`:e;return[`${(0,y.cB)(t.patch)}/onhit-overview`,t.patch,t.queueType,n,`${r}.json`].join("/")}(e,R(E({},c),{opp:a(c.opp)})),p=`${C}::${u}`,m=(0,l.kc)(u,{ssr:r,skip:n,customCacheKey:"world"===c.region&&"emerald_plus"===c.rank&&"ranked_solo_5x5"===c.queueType?p:"",onCompleted:(e,t,r)=>{const n=(0,_.ib)(t),a=(0,b.k)(c.region,c.rank,"");return r.match(C)?Object.fromEntries(Object.entries(n||{}).filter((([e,t])=>e.match(a)))):n}});return R(E({},m),{loading:s||m.loading})}(e%1e4,{ssr:!0,forcedParams:t,skip:n.opp});const B=R(E({},t),{opp:"allChampions"}),L=!(n.opp&&r&&!o),{data:M,loading:Z,error:G}=e>1e4?V(e,{ssr:!0,forcedParams:B,skip:!L}):z(e,{ssr:!0,forcedParams:B,skip:!L});L&&(r=M,o=Z,i=G),a[e]={forceDefaultData:L,championOverview:r,apChampionOverview:s,tankChampionOverview:p,adChampionOverview:h,critChampionOverview:k,lethalityChampionOverview:x,onHitChampionOverview:N,fetchingChampionOverview:o||c||m||f||$||A||D,errorChampionOverview:i||u||v||g||I||S||K}})),a}function V(e,{forcedParams:t,ssr:r,skip:n}={}){const{getChampionIdByName:a}=(0,d.Th)(),{validatedParams:o}=F(e,"build",{keepDefaultParams:!0}),{data:i,loading:s}=Y({ssr:r}),c=E(E({},o),t),u=function(e,t){const{data:r}=(0,w.M)({apiKey:"overview",patch:t.patch});"ranked_solo_5x5"!==t.queueType&&"ranked_flex_sr"!==t.queueType&&delete t.opp,"arurf"===t.queueType&&(t.queueType="urf");const n=t.opp?`matchups/${e}_${t.opp}`:e;return[`${(0,y.cB)(t.patch)}/ct-overview`,t.patch,t.queueType,n,`${r}.json`].join("/")}(e,R(E({},c),{opp:a(c.opp)})),p=`${x}::${u}`,m=(0,l.kc)(u,{ssr:r,skip:n||!i,customCacheKey:"world"===c.region&&"emerald_plus"===c.rank&&"ranked_solo_5x5"===c.queueType?p:"",onCompleted:(e,t,r)=>{const n=(0,_.ib)(t),a=(0,b.k)(c.region,c.rank,"");return r.match(x)?Object.fromEntries(Object.entries(n||{}).filter((([e,t])=>e.match(a)))):n}});return R(E({},m),{loading:s||m.loading})}function z(e,{forcedParams:t,ssr:r,skip:n}={}){const{getChampionIdByName:a}=(0,d.Th)(),{validatedParams:o}=F(e,"build",{keepDefaultParams:!0,ssr:r}),{data:i,loading:s}=Y({ssr:r}),c=E(E({},o),t),u=function(e,t){const{data:r}=(0,w.M)({apiKey:"overview",patch:t.patch});"ranked_solo_5x5"!==t.queueType&&"ranked_flex_sr"!==t.queueType&&delete t.opp,"arurf"===t.queueType&&(t.queueType="urf");const n=t.opp?`matchups/${e}_${t.opp}`:e;return[`${(0,y.cB)(t.patch)}/overview`,t.patch,t.queueType,n,`${r}.json`].join("/")}(e,R(E({},c),{opp:a(c.opp)})),p=`${I}::${u}`,m=(0,l.kc)(u,{ssr:r,skip:n||!i,customCacheKey:"world"===c.region&&"emerald_plus"===c.rank&&"ranked_solo_5x5"===c.queueType?p:"",onCompleted:(e,t,r)=>{const n=(0,_.ib)(t),a=(0,b.k)(c.region,c.rank,"");return r.match(I)?Object.fromEntries(Object.entries(n||{}).filter((([e,t])=>e.match(a)))):n}});return R(E({},m),{loading:s||m.loading,params:c})}function H(e,{forcedParams:t,ssr:r}={}){const{validatedParams:n}=F(e,"build",{keepDefaultParams:!0}),{data:a,loading:o}=Y({ssr:r}),i=E(E({},n),t),s=function(e,t){const{data:r}=(0,w.M)({apiKey:"rankings",patch:t.patch});"arurf"===t.queueType&&(t.queueType="urf");let n="rankings";return e>1e4&&(n="ct-rankings"),[`${(0,y.cB)(t.patch)}/${n}`,t.patch,t.queueType,e,`${r}.json`].join("/")}(e,i),c=`${A}::${s}`,u=(0,l.kc)(s,{ssr:r,skip:!a,customCacheKey:"world"===i.region&&"emerald_plus"===i.rank&&"ranked_solo_5x5"===i.queueType?c:"",onCompleted:(e,t,r)=>{const n=(0,v.G)(t),a=(0,b.k)(i.region,i.rank,"");return r.match(A)?Object.fromEntries(Object.entries(n||{}).filter((([e,t])=>e.match(a)))):n}});return R(E({},u),{loading:o||u.loading})}function J(e,t,{ssr:r}={}){const{validatedParams:n}=F(e,t,{keepDefaultParams:!0}),{data:a,loading:o}=Y({ssr:r}),i=function(e,t){const{data:r}=(0,w.M)({apiKey:"builds",patch:t.patch});return[`${(0,y.cB)(t.patch)}/builds`,t.patch,t.queueType,e,`${r}.json`].join("/")}(e,n),s=(0,l.kc)(i,{ssr:r,skip:!a,onCompleted:(e,t)=>(0,_.nf)(t)});return R(E({},s),{loading:o||s.loading})}function Q(e,{ssr:t}={}){const{validatedParams:r}=F(e,"matchups",{keepDefaultParams:!0}),{data:n,loading:a}=Y({ssr:t}),o=function(e,t){const{data:r}=(0,w.M)({apiKey:"matchups",patch:t.patch});return[`${(0,y.cB)(t.patch)}/matchups`,t.patch,t.queueType,e,`${r}.json`].join("/")}(e,r),i=(0,l.kc)(o,{ssr:t,skip:!n,onCompleted:(e,t)=>((0,h.DP)(t)||{}).matchups});return R(E({},i),{loading:a||i.loading})}function W(e,{ssr:t}={}){const{validatedParams:r}=F(e,"items",{keepDefaultParams:!0,ssr:!0}),{data:n,loading:a}=Y({ssr:t}),o=function(e,t){const{data:r}=(0,w.M)({apiKey:"items",patch:t.patch});return[`${(0,y.cB)(t.patch)}/table/items`,t.patch,t.queueType,e,`${r}.json`].join("/")}(e,r),i=(0,l.kc)(o,{ssr:t,skip:!n,onCompleted:(e,t)=>(0,f.z)(t)});return R(E({},i),{loading:a||i.loading})}function X(e,{ssr:t}={}){const{validatedParams:r}=F(e,"runes-table",{keepDefaultParams:!0}),{data:n,loading:a}=Y({ssr:t}),o=function(e,t){const{data:r}=(0,w.M)({apiKey:"runes",patch:t.patch});return[`${(0,y.cB)(t.patch)}/table/runes`,t.patch,t.queueType,e,`${r}.json`].join("/")}(e,r),i=(0,l.kc)(o,{ssr:t,skip:!n,onCompleted:(e,t)=>(0,g.C)(t)});return R(E({},i),{loading:a||i.loading})}function ee(e,{ssr:t}={}){const{validatedParams:r}=F(e,"duos",{keepDefaultParams:!0}),{data:n,loading:a}=Y({ssr:t}),o=function(e,t){const{data:r}=(0,w.M)({apiKey:"champion_duos",patch:t.patch});return[`${(0,y.cB)(t.patch)}/champion_duos`,t.patch,t.queueType,e,`${r}.json`].join("/")}(e,r),i=(0,l.kc)(o,{ssr:t,skip:!n,onCompleted:(e,t)=>(0,k.x)(t)});return R(E({},i),{loading:a||i.loading})}function te(e,t,{ssr:r}={}){const{useBackupChampions:n}=(0,d.Th)(),a=n(),l=(0,s.Nc)(),c=(0,o.h)()({queryParams:l,page:t}),{data:u}=Y({ssr:r});if(c.role)return c.role;if(u){return e in u?(0,i.tn)(u[e][0]):a[e]&&a[e].primaryRole?a[e].primaryRole:"middle"}}function re(e){const t=(0,s.Nc)(),r=(0,o.h)()({queryParams:t,page:e}),n=(0,a.TH)();return n.pathname.includes("build/aram")?"normal_aram":n.pathname.includes("build/arurf")?"arurf":"queueType"in r?r.queueType:"ranked_solo_5x5"}function ne(e,t){const{getWorkingPatch:r}=(0,d.Th)(),n=r().split(".").slice(0,-1);let a=t.split("_"),o=null;"12"===n[0]&&parseInt(a[1])<10?o="12_10":(o=t,parseInt(n[1])<parseInt(a[1])&&(o=n.join("_")));const{data:i,loading:s,error:c}=(0,l.kc)(`https://static.bigbrain.gg/assets/lol/queue_type_champion_changes/aram/${o}.json`,{ssr:!0,skip:"normal_aram"!==e}),{data:u,loading:p,error:m}=(0,l.kc)(`https://static.bigbrain.gg/assets/lol/queue_type_champion_changes/urf/${o}.json`,{ssr:!0,skip:"urf"!==e&&"arurf"!==e});return{allChampionStatsARAM:i,allChampionStatsURF:u}}function ae(e){const t=e,r={141:[100141,200141]};function o(e){return r[e]?r[e][0]:e}function i(e){return e>1e4}function l(e,t,r){if(!e||!t||!r)return 0;let n=e.filter((e=>t.includes(e)));if(n.length)return n[0];var a=0,o=0;for(let n=0;n<e.length;n++){if(t.includes(e[n]))return e[n];r.includes(e[n])||0!==a?o=e[n]:a=e[n]}return 0!=a?a:o}const c=(0,a.UO)(),v=(0,a.TH)(),{getChampionIdByName:h}=(0,d.Th)(),f=c.champion,g=h((0,u.fg)(f.split("-")[0]));let k=(0,s.Nc)(),y={};(0,p.vl)(v.pathname,k)&&(k=(0,p.vl)(v.pathname,k)),(0,p.SP)(v)&&(y=(0,p.SP)(v));const{useRiotMythicItems:$,useRiotBootItems:w}=(0,d.Th)(),{data:b}=$({ssr:!0}),{data:I}=w({ssr:!0}),{validatedParams:P}=F(g,"build",{keepDefaultParams:!0,ssr:!0}),{data:T,loading:q,error:O}=H(g,{ssr:!0,forcedParams:y}),{data:j,loading:C,error:x}=(0,m.LV)(g,{ssr:!1,forcedParams:y}),A=R(E(E(E({},P),k),y),{role:t}),S=U(g,{ssr:!0,forcedParams:y,queryParams:k}),N=(c.multi,c.multi,c.multi,c.multi,c.multi,c.multi,i(o(g))?[S[r[g][0]].fetchingChampionOverview,S[r[g][1]].fetchingChampionOverview]:[S[g].fetchingChampionOverview]),D=(0,n.useRef)(!0),{buildKey:K,tabData:B}=(0,n.useMemo)((()=>{var e,t,r,n,a,s,c,u,d,p,m,v,h,f,k,y,$,w,P,T,q,O,j,C,x,N,K,B,L,M,E,R;let F=o(g);const Y={},Z=o(g);if(i(Z)){let n=0;for(const[a,o]of Object.entries(S)){const i=(0,_.YT)(o.championOverview,A);Y[a]=[null==(e=null==i?void 0:i.rec_runes)?void 0:e.active_perks[0],(null==(t=null==i?void 0:i.rec_core_items)?void 0:t.items)?l(null==(r=null==i?void 0:i.rec_core_items)?void 0:r.items,b,I):0],i&&i.win_rate>n&&D.current&&(F=a,n=i.win_rate)}D.current=!1}else{const e=(0,_.YT)(null==(n=S[Z])?void 0:n.championOverview,A);Y.default=[null==(a=null==e?void 0:e.rec_runes)?void 0:a.active_perks[0],(null==(s=null==e?void 0:e.rec_core_items)?void 0:s.items)?l(null==(c=null==e?void 0:e.rec_core_items)?void 0:c.items,b,I):0,1e5];const t=(0,_.YT)(null==(u=S[Z])?void 0:u.apChampionOverview,A),r=function(e,t,r,n){var a,o,i,s,c,u,d,p,m;const _=(null==(a=null==e?void 0:e.rec_core_items)?void 0:a.items)?l(null==(o=null==e?void 0:e.rec_core_items)?void 0:o.items,r,n):0,v=(null==(i=null==t?void 0:t.rec_core_items)?void 0:i.items)?l(null==(s=null==t?void 0:t.rec_core_items)?void 0:s.items,r,n):0;return t&&_&&v&&!(v===_)&&(null==(c=null==t?void 0:t.item_options_1)?void 0:c.length)>1&&(null==(u=null==t?void 0:t.item_options_2)?void 0:u.length)>1&&(null==(d=null==t?void 0:t.item_options_3)?void 0:d.length)>1&&(null==(p=null==t?void 0:t.rec_starting_items)?void 0:p.matches)>9&&(null==(m=null==t?void 0:t.rec_core_items)?void 0:m.matches)>9}(e,t,b,I);t&&e&&r&&(Y.ap=[null==(d=null==t?void 0:t.rec_runes)?void 0:d.active_perks[0],(null==(p=null==t?void 0:t.rec_core_items)?void 0:p.items)?l(null==(m=null==t?void 0:t.rec_core_items)?void 0:m.items,b,I):0,t.matches?t.matches:0]);const o=(0,_.YT)(null==(v=S[Z])?void 0:v.tankChampionOverview,A),i=function(e,t,r,n){var a,o,i,s,c,u,d,p,m;const _=(null==(a=null==e?void 0:e.rec_core_items)?void 0:a.items)?l(null==(o=null==e?void 0:e.rec_core_items)?void 0:o.items,r,n):0,v=(null==(i=null==t?void 0:t.rec_core_items)?void 0:i.items)?l(null==(s=null==t?void 0:t.rec_core_items)?void 0:s.items,r,n):0;return t&&_&&v&&!(v===_)&&(null==(c=null==t?void 0:t.item_options_1)?void 0:c.length)>1&&(null==(u=null==t?void 0:t.item_options_2)?void 0:u.length)>1&&(null==(d=null==t?void 0:t.item_options_3)?void 0:d.length)>1&&(null==(p=null==t?void 0:t.rec_starting_items)?void 0:p.matches)>9&&(null==(m=null==t?void 0:t.rec_core_items)?void 0:m.matches)>9}(e,o,b,I);o&&e&&i&&(Y.tank=[null==(h=null==o?void 0:o.rec_runes)?void 0:h.active_perks[0],(null==(f=null==o?void 0:o.rec_core_items)?void 0:f.items)?l(null==(k=null==o?void 0:o.rec_core_items)?void 0:k.items,b,I):0,o.matches?o.matches:0]);const g=(0,_.YT)(null==(y=S[Z])?void 0:y.adChampionOverview,A),D=function(e,t,r,n){var a,o,i,s,c,u,d,p,m;const _=(null==(a=null==e?void 0:e.rec_core_items)?void 0:a.items)?l(null==(o=null==e?void 0:e.rec_core_items)?void 0:o.items,r,n):0,v=(null==(i=null==t?void 0:t.rec_core_items)?void 0:i.items)?l(null==(s=null==t?void 0:t.rec_core_items)?void 0:s.items,r,n):0;return t&&_&&v&&!(v===_)&&(null==(c=null==t?void 0:t.item_options_1)?void 0:c.length)>1&&(null==(u=null==t?void 0:t.item_options_2)?void 0:u.length)>1&&(null==(d=null==t?void 0:t.item_options_3)?void 0:d.length)>1&&(null==(p=null==t?void 0:t.rec_starting_items)?void 0:p.matches)>9&&(null==(m=null==t?void 0:t.rec_core_items)?void 0:m.matches)>9&&(null==t?void 0:t.rec_core)}(e,g,b,I);g&&e&&D&&(Y.ad=[null==($=null==g?void 0:g.rec_runes)?void 0:$.active_perks[0],(null==(w=null==g?void 0:g.rec_core_items)?void 0:w.items)?l(null==(P=null==g?void 0:g.rec_core_items)?void 0:P.items,b,I):0,g.matches?g.matches:0]);const R=(0,_.YT)(null==(T=S[Z])?void 0:T.critChampionOverview,A),F=function(e,t,r,n){var a,o,i,s,c,u,d,p,m;const _=(null==(a=null==e?void 0:e.rec_core_items)?void 0:a.items)?l(null==(o=null==e?void 0:e.rec_core_items)?void 0:o.items,r,n):0,v=(null==(i=null==t?void 0:t.rec_core_items)?void 0:i.items)?l(null==(s=null==t?void 0:t.rec_core_items)?void 0:s.items,r,n):0;return t&&_&&v&&!(v===_)&&(null==(c=null==t?void 0:t.item_options_1)?void 0:c.length)>1&&(null==(u=null==t?void 0:t.item_options_2)?void 0:u.length)>1&&(null==(d=null==t?void 0:t.item_options_3)?void 0:d.length)>1&&(null==(p=null==t?void 0:t.rec_starting_items)?void 0:p.matches)>9&&(null==(m=null==t?void 0:t.rec_core_items)?void 0:m.matches)>9}(e,R,b,I);R&&e&&F&&(Y.crit=[null==(q=null==R?void 0:R.rec_runes)?void 0:q.active_perks[0],(null==(O=null==R?void 0:R.rec_core_items)?void 0:O.items)?l(null==(j=null==R?void 0:R.rec_core_items)?void 0:j.items,b,I):0,R.matches?R.matches:0]);const G=(0,_.YT)(null==(C=S[Z])?void 0:C.lethalityChampionOverview,A),U=function(e,t,r,n){var a,o,i,s,c,u,d,p,m;const _=(null==(a=null==e?void 0:e.rec_core_items)?void 0:a.items)?l(null==(o=null==e?void 0:e.rec_core_items)?void 0:o.items,r,n):0,v=(null==(i=null==t?void 0:t.rec_core_items)?void 0:i.items)?l(null==(s=null==t?void 0:t.rec_core_items)?void 0:s.items,r,n):0;return t&&_&&v&&!(v===_)&&(null==(c=null==t?void 0:t.item_options_1)?void 0:c.length)>1&&(null==(u=null==t?void 0:t.item_options_2)?void 0:u.length)>1&&(null==(d=null==t?void 0:t.item_options_3)?void 0:d.length)>1&&(null==(p=null==t?void 0:t.rec_starting_items)?void 0:p.matches)>9&&(null==(m=null==t?void 0:t.rec_core_items)?void 0:m.matches)>9}(e,G,b,I);G&&e&&U&&(Y.lethality=[null==(x=null==G?void 0:G.rec_runes)?void 0:x.active_perks[0],(null==(N=null==G?void 0:G.rec_core_items)?void 0:N.items)?l(null==(K=null==G?void 0:G.rec_core_items)?void 0:K.items,b,I):0,G.matches?G.matches:0]);const V=(0,_.YT)(null==(B=S[Z])?void 0:B.onHitChampionOverview,A),z=function(e,t,r,n){var a,o,i,s,c,u,d,p,m;const _=(null==(a=null==e?void 0:e.rec_core_items)?void 0:a.items)?l(null==(o=null==e?void 0:e.rec_core_items)?void 0:o.items,r,n):0,v=(null==(i=null==t?void 0:t.rec_core_items)?void 0:i.items)?l(null==(s=null==t?void 0:t.rec_core_items)?void 0:s.items,r,n):0;return t&&_&&v&&!(v===_)&&(null==(c=null==t?void 0:t.item_options_1)?void 0:c.length)>1&&(null==(u=null==t?void 0:t.item_options_2)?void 0:u.length)>1&&(null==(d=null==t?void 0:t.item_options_3)?void 0:d.length)>1&&(null==(p=null==t?void 0:t.rec_starting_items)?void 0:p.matches)>9&&(null==(m=null==t?void 0:t.rec_core_items)?void 0:m.matches)>9}(e,V,b,I);V&&e&&z&&(Y.onhit=[null==(L=null==V?void 0:V.rec_runes)?void 0:L.active_perks[0],(null==(M=null==V?void 0:V.rec_core_items)?void 0:M.items)?l(null==(E=null==V?void 0:V.rec_core_items)?void 0:E.items,b,I):0,V.matches?V.matches:0])}if(Object.keys(Y).length>4){let e,t=1e5;for(const r in Y){const n=null!=(R=Y[r][2])?R:0;n<t&&(t=n,e=r)}delete Y[e]}return{buildKey:F,tabData:Y}}),[S,...N,JSON.stringify(A)]);return[B,A.patch]}},73682:(e,t,r)=>{r.d(t,{Dx:()=>o,R7:()=>l,Ss:()=>s,_L:()=>i,kR:()=>a,w8:()=>n});function n(e=null){return"one_for_all"===e?0:.5}function a(e){return e<45?"D":e<48.5?"C":e<51.5?"B":e<53?"A":e<55?"S":"S+"}function o(e){return!e||isNaN(e)?"":e<45?"shinggo-tier":e<48.5?"meh-tier":e<51.5?"okay-tier":e<53?"good-tier":e<55?"great-tier":"volxd-tier"}function i(e){return e>=2?"S+":e>=.75?"S":e>=0?"A":e>=-.5?"B":e>=-.75?"C":"D"}function s(e){return e>=2?"volxd-tier":e>=.75?"great-tier":e>=0?"good-tier":e>=-.5?"okay-tier":e>=-.75?"meh-tier":"shinggo-tier"}function l(e){return e>=2?"#FF9B00":e>=.75?"#3273FA":e>=0?"#7EA4F4":e>=-.5?"#FFFFFF":e>=-.75?"#FCB1B2":"#FF4E50"}}}]);

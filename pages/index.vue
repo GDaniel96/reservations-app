@@ -39,16 +39,29 @@ import Reservations from "../components/Reservations.vue";
 import Loading from "~/components/Loading.vue";
 import { useUserStore } from "../store/user";
 import { onAuthStateChanged } from "firebase/auth";
+import { getDocs, query, where, collection } from "firebase/firestore";
 
 export default {
   setup() {
     const userStore = useUserStore();
     const auth = inject("auth");
+    const db = inject("firestore");
 
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (!user) {
         return;
       }
+      const userDocument = query(
+        collection(db, "users"),
+        where("uid", "==", user.uid)
+      );
+      const userQuerySnapshot = await getDocs(userDocument).then(
+        (documents) => {
+          return documents.docs[0];
+        }
+      );
+      userStore.userData.isAdmin =
+        userQuerySnapshot.data().role === "admin" ? true : false;
 
       userStore.userData.userLoggedIn = true;
     });
