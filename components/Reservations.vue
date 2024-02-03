@@ -42,14 +42,12 @@
       <i class="fa-solid fa-trash-can"></i>
     </button>
   </div>
-  <p>{{ cutoffDate }}</p>
 </template>
 
 <script>
 import {
   collection,
   getDocs,
-  getDoc,
   query,
   where,
   doc,
@@ -151,7 +149,3 @@ export default {
   border-radius: 5px;
 }
 </style>
-
-<!-- v-model="filters.showAll" @click="toggleFilters" :disabled="filters.showAll"
-v-model="filters.nextWeek" @click="toggleFilters" :disabled="filters.nextWeek"
-v-model="filters.nextMonth" @click="toggleFilters" :disabled="filters.nextMonth" -->

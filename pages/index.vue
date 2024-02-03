@@ -26,7 +26,7 @@
 
     <div
       v-else
-      class="previous-reservations bg-[#334155] p-4 flex gap-3 flex-col rounded overflow-auto md:w-2/4"
+      class="previous-reservations bg-[#334155] p-4 flex gap-3 flex-col rounded overflow-auto md:w-2/4 max-h-80"
     >
       <Reservations />
     </div>
