@@ -64,22 +64,27 @@ export default {
     const auth = inject("auth");
     const currentFilter = ref("all");
     const cutoffDate = computed(() => {
-      return getCutoffDateByFilterType(currentFilter);
+      return getDateRangeByFilterType(currentFilter);
     });
     const isAdmin = userStore.userData.isAdmin;
 
-    const getCutoffDateByFilterType = (filterType) => {
+    const getDateRangeByFilterType = (filterType) => {
       const currentDate = new Date();
-      if (filterType.value === "all") {
-        return new Date();
-      } else if (filterType.value === "nextWeek") {
-        return new Date(
-          new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000)
-        );
-      } else if (filterType.value === "nextMonth") {
-        return new Date(
-          new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
-        );
+
+      switch (filterType.value) {
+        case "nextWeek":
+          return [
+            new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000),
+            new Date(currentDate.getTime() + 14 * 24 * 60 * 60 * 1000),
+          ];
+
+        case "nextMonth":
+          return [
+            new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1),
+            new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, 1),
+          ];
+        default:
+          return [new Date()];
       }
     };
 
@@ -90,8 +95,18 @@ export default {
         return;
       }
 
+      const whereClauses = getDateRangeByFilterType(currentFilter).map(
+        (date, index) => {
+          if (index === 0) {
+            return where("selectedDate", ">=", date);
+          }
+
+          return where("selectedDate", "<", date);
+        }
+      );
+
       const queryArguments = [collection(db, "reservations")];
-      queryArguments.push(where("selectedDate", ">=", cutoffDate.value));
+      queryArguments.push(...whereClauses);
 
       if (!isAdmin) {
         queryArguments.push(where("userId", "==", user.uid));
